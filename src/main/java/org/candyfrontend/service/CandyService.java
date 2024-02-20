@@ -7,6 +7,9 @@ import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.client.RestClient;
 
+import java.util.List;
+import java.util.Objects;
+
 
 @AllArgsConstructor
 public class CandyService implements CandyClient {
@@ -20,38 +23,53 @@ public class CandyService implements CandyClient {
     @Override
     public ResponseEntity<?> getCandy(long id) {
 
-        restClient.get()
-        return null;
+        return restClient.get()
+                .uri("/{id}",id)
+                .accept(MediaType.APPLICATION_JSON)
+                .retrieve()
+                .toEntity(Candy.class);
     }
 
     @Override
     public ResponseEntity<?> getCandyList() {
-        return null;
+        return restClient.get()
+                .uri("/all")
+                .accept(MediaType.APPLICATION_JSON)
+                .retrieve()
+                .toEntity(List.class);
     }
 
     @Override
     public ResponseEntity<?> addCandy(Candy candy) {
         return restClient.post()
+                .uri("/",candy)
                 .contentType(MediaType.APPLICATION_JSON)
+                .accept(MediaType.APPLICATION_JSON)
                 .body(candy)
                 .retrieve()
-                .body(?.class);
+                .toEntity(Candy.class);
 
     }
 
     @Override
-    public Candy updateCandy(Candy candy) {
+    public  ResponseEntity<?> updateCandy(Candy candy) {
         return restClient.put()
                 .uri("/{id}",candy.getId())
                 .contentType(MediaType.APPLICATION_JSON)
+                .accept(MediaType.APPLICATION_JSON)
+                .body(Candy.class)
                 .retrieve()
-                .body(Candy.class);
+                .toEntity(Candy.class);
 
 
     }
 
     @Override
     public ResponseEntity<?> deleteCandy(long id) {
-        return null;
+        return restClient.delete()
+                .uri("/",id)
+                .accept(MediaType.APPLICATION_JSON)
+                .retrieve()
+                .toEntity(Candy.class);
     }
 }

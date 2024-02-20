@@ -23,7 +23,7 @@ public interface CandyClient {
     ResponseEntity<?> addCandy(@RequestBody Candy candy);
 
     @PutExchange("/")
-    ResponseEntity<?> updateCandy(@RequestBody Candy candy);
+    ResponseEntity<?> updateCandy(@PathVariable long id,@RequestBody Candy candy);
 
     @DeleteExchange("/{id}")
     public ResponseEntity<?> deleteCandy(@PathVariable long id);

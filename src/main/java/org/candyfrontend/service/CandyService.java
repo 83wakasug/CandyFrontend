@@ -5,12 +5,13 @@ import org.candyfrontend.client.CandyClient;
 import org.candyfrontend.form.Candy;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
+import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestClient;
 
 import java.util.List;
 import java.util.Objects;
 
-
+@Service
 @AllArgsConstructor
 public class CandyService implements CandyClient {
 
@@ -52,9 +53,9 @@ public class CandyService implements CandyClient {
     }
 
     @Override
-    public  ResponseEntity<?> updateCandy(Candy candy) {
+    public  ResponseEntity<?> updateCandy(long id,Candy candy) {
         return restClient.put()
-                .uri("/{id}",candy.getId())
+                .uri("/{id}",id,Candy.class)
                 .contentType(MediaType.APPLICATION_JSON)
                 .accept(MediaType.APPLICATION_JSON)
                 .body(Candy.class)

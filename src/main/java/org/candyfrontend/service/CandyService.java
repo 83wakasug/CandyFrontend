@@ -3,13 +3,15 @@ package org.candyfrontend.service;
 import lombok.AllArgsConstructor;
 import org.candyfrontend.client.CandyClient;
 import org.candyfrontend.form.Candy;
+import org.candyfrontend.form.CandyUpdate;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestClient;
 
+import java.util.Collections;
 import java.util.List;
-import java.util.Objects;
+import java.util.Map;
 
 @Service
 @AllArgsConstructor
@@ -53,12 +55,13 @@ public class CandyService implements CandyClient {
     }
 
     @Override
-    public  ResponseEntity<?> updateCandy(long id,Candy candy) {
+    public  ResponseEntity<?> updateCandy(long id, CandyUpdate update) {
+        Map<String, Object> uriVariables = Collections.singletonMap("id", id);
         return restClient.put()
-                .uri("/{id}",id,Candy.class)
+                .uri("/{id}",uriVariables)
                 .contentType(MediaType.APPLICATION_JSON)
                 .accept(MediaType.APPLICATION_JSON)
-                .body(Candy.class)
+                .body(update)
                 .retrieve()
                 .toEntity(Candy.class);
 
@@ -68,7 +71,7 @@ public class CandyService implements CandyClient {
     @Override
     public ResponseEntity<?> deleteCandy(long id) {
         return restClient.delete()
-                .uri("/",id)
+                .uri("/{id}",id)
                 .accept(MediaType.APPLICATION_JSON)
                 .retrieve()
                 .toEntity(Candy.class);

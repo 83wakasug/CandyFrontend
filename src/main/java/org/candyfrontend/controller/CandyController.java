@@ -2,6 +2,7 @@ package org.candyfrontend.controller;
 
 import lombok.RequiredArgsConstructor;
 import org.candyfrontend.form.Candy;
+import org.candyfrontend.form.CandyUpdate;
 import org.candyfrontend.service.CandyService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -18,7 +19,7 @@ public class CandyController {
         return candyService.getCandy(id);
     }
 
-    @GetMapping("/")
+    @GetMapping("/all")
     public ResponseEntity<?> findAll(){
         return candyService.getCandyList();
     }
@@ -30,11 +31,11 @@ public class CandyController {
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<?> update(@PathVariable long id,@RequestBody Candy candy){
+    public ResponseEntity<?> update(@PathVariable long id,@RequestBody CandyUpdate candy){
      return  candyService.updateCandy(id,candy);
     }
 
-    @PutMapping("/{id}")
+    @DeleteMapping("/{id}")
     public ResponseEntity<?> delete(@PathVariable long id){
         return  candyService.deleteCandy(id);
     }

@@ -1,6 +1,7 @@
 package org.candyfrontend.client;
 
 import org.candyfrontend.form.Candy;
+import org.candyfrontend.form.CandyUpdate;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -23,7 +24,9 @@ public interface CandyClient {
     ResponseEntity<?> addCandy(@RequestBody Candy candy);
 
     @PutExchange("/")
-    ResponseEntity<?> updateCandy(@PathVariable long id,@RequestBody Candy candy);
+ ResponseEntity<?> updateCandy(long id, CandyUpdate update);
+
+
 
     @DeleteExchange("/{id}")
     public ResponseEntity<?> deleteCandy(@PathVariable long id);

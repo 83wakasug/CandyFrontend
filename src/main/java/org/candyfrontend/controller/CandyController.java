@@ -6,14 +6,20 @@ import org.candyfrontend.form.CandyUpdate;
 import org.candyfrontend.service.CandyService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
-@RestController
-@RequestMapping("/api/candy")
+@Controller
+@RequestMapping("/candy")
 @RequiredArgsConstructor
 public class CandyController {
 
     private final CandyService candyService;
+
+    @GetMapping("")
+    public String menu( ){
+        return "menu";
+    }
     @GetMapping("/{id}")
     public ResponseEntity<?> findById( @PathVariable int id){
         return candyService.getCandy(id);

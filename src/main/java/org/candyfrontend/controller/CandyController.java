@@ -7,8 +7,11 @@ import org.candyfrontend.service.CandyService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+import java.lang.reflect.Array;
+import java.util.ArrayList;
 @Controller
 @RequestMapping("/candy")
 @RequiredArgsConstructor
@@ -26,8 +29,19 @@ public class CandyController {
     }
 
     @GetMapping("/all")
-    public ResponseEntity<?> findAll(){
-        return candyService.getCandyList();
+    public String findAll(Model model) {
+
+        ResponseEntity<ArrayList<Candy>> responseEntity = (ResponseEntity<ArrayList<Candy>>) candyService.getCandyList();
+
+        if (responseEntity.getStatusCode().is2xxSuccessful()) {
+            ArrayList<Candy> candyList = responseEntity.getBody();
+            model.addAttribute("candy", candyList);
+        } else {
+            // Handle the error case if needed
+            model.addAttribute("candy", null);
+        }
+
+        return "list";
     }
 
     @PostMapping
@@ -36,14 +50,17 @@ public class CandyController {
         return candyService.addCandy(candy);
     }
 
-    @PutMapping("/{id}")
-    public ResponseEntity<?> update(@PathVariable long id,@RequestBody CandyUpdate candy){
-     return  candyService.updateCandy(id,candy);
+    @PutMapping("/update")
+    public String update(Model model, Candy candy){
+        model.addAttribute("candy", candy);
+        candyService.updateCandy(candy);
+        return "list" ;
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<?> delete(@PathVariable long id){
-        return  candyService.deleteCandy(id);
+    public String delete(@PathVariable long id){
+        candyService.deleteCandy(id);
+        return "list" ;
     }
 
 }

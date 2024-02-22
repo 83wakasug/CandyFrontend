@@ -21,8 +21,17 @@
         <td><span th:text="${candy.name}"> Name </span></td>
         <td><span th:text="${candy.manufacturingCompany}"> ManufacturingCompany </span></td>
         <td><span th:text="${candy.price}"> Price </span></td>
+     <td>
+         <a class="btn"
+            th:href="@{/edit (id=${candy.id})}">Edit</a>
+         <a class="btn"
+            th:href="@{/delete (id=${candy.id})}">
+             onclick="return confirm('Are you sure?')">
+             Delete</a>
+     </td>
     </tr>
     </tbody>
 </table>
 </body>
 </html>
+

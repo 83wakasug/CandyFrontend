@@ -55,13 +55,13 @@ public class CandyService implements CandyClient {
     }
 
     @Override
-    public  ResponseEntity<?> updateCandy(long id, CandyUpdate update) {
-        Map<String, Object> uriVariables = Collections.singletonMap("id", id);
+    public  ResponseEntity<?> updateCandy(Candy candy) {
+        Map<String, Object> uriVariables = Collections.singletonMap("id", candy.getId());
         return restClient.put()
-                .uri("/{id}",uriVariables)
+                .uri("/update",uriVariables)
                 .contentType(MediaType.APPLICATION_JSON)
                 .accept(MediaType.APPLICATION_JSON)
-                .body(update)
+                .body(candy)
                 .retrieve()
                 .toEntity(Candy.class);
 

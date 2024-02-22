@@ -24,7 +24,7 @@ public interface CandyClient {
     ResponseEntity<?> addCandy(@RequestBody Candy candy);
 
     @PutExchange("/")
- ResponseEntity<?> updateCandy(long id, CandyUpdate update);
+ ResponseEntity<?> updateCandy(Candy update);
 
 
 

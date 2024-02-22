@@ -1,8 +1,6 @@
 package org.candyfrontend.client;
 
 import org.candyfrontend.form.Candy;
-import org.candyfrontend.form.CandyUpdate;
-import org.springframework.http.HttpEntity;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;

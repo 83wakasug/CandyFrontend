@@ -3,7 +3,6 @@ package org.candyfrontend.service;
 import lombok.AllArgsConstructor;
 import org.candyfrontend.client.CandyClient;
 import org.candyfrontend.form.Candy;
-import org.candyfrontend.form.CandyUpdate;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;

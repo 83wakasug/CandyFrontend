@@ -5,6 +5,7 @@
     <title>Candy Inventory All Data</title>
 </head>
 <body>
+
 <table>
     <thead>
     <tr>
@@ -14,24 +15,26 @@
     </tr>
     </thead>
     <tbody>
-    <tr th:if="${candy.empty}">
-        <td colspan="2"> No Candy Available </td>
-    </tr>
     <tr th:each="candy : ${candy}">
+        
         <td><span th:text="${candy.name}"> Name </span></td>
         <td><span th:text="${candy.manufacturingCompany}"> ManufacturingCompany </span></td>
         <td><span th:text="${candy.price}"> Price </span></td>
      <td>
          <a class="btn"
-            th:href="@{/edit (id=${candy.id})}">Edit</a>
+            th:href="@{candy/edit/{id} (id=${candy.id})}">Edit</a>
+
+         <input type="submit" value="Delete">
          <a class="btn"
-            th:href="@{/delete (id=${candy.id})}">
-             onclick="return confirm('Are you sure?')">
-             Delete</a>
+            th:href="@{candy/delete/{id} (id=${candy.id})}">Delete</a>
+
      </td>
+
+        </form>
     </tr>
     </tbody>
-</table>
+    </table>
+
 </body>
 </html>
 

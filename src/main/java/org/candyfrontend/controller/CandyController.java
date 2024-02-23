@@ -31,6 +31,21 @@ public class CandyController {
         model.addAttribute("candyDto",new CandyDto());
         return "create";
     }
+
+    @GetMapping("/edit")
+    public String edit_delete(Model model){
+
+        ResponseEntity<ArrayList<Candy>> responseEntity = (ResponseEntity<ArrayList<Candy>>) candyService.getCandyList();
+
+        if (responseEntity.getStatusCode().is2xxSuccessful()) {
+            ArrayList<Candy> candyList = responseEntity.getBody();
+            model.addAttribute("candy", candyList);
+        } else {
+            // Handle the error case if needed
+            model.addAttribute("candy", null);
+        }
+        return "update.delete";
+    }
     @GetMapping("/{id}")
     public ResponseEntity<?> findById( @PathVariable int id){
         return candyService.getCandy(id);
@@ -55,7 +70,6 @@ public class CandyController {
     @PostMapping("/create")
     @ResponseStatus(HttpStatus.CREATED)
     public String addCandy(@ModelAttribute @Validated CandyDto candyDto, BindingResult result,Model model){
-        System.out.println(candyDto.getName());
          var candy= mapper.map(candyDto,Candy.class);
          ResponseEntity<?> addedCandy =candyService.addCandy(candy);
         System.out.println(addedCandy.getBody());
@@ -63,17 +77,19 @@ public class CandyController {
         return "redirect:/candy/index";
     }
 
-    @PutMapping("/update")
-    public String update(Model model, Candy candy){
+    @PutMapping("/edit/{id}")
+    public String edit(Model model, @ModelAttribute @Validated Candy candy){
         model.addAttribute("candy", candy);
         candyService.updateCandy(candy);
-        return "list" ;
+        return "redirect:/candy/index" ;
     }
 
-    @DeleteMapping("/{id}")
-    public String delete(@PathVariable long id){
-        candyService.deleteCandy(id);
-        return "list" ;
+    @GetMapping("/delete/{id}")
+    public String delete(@PathVariable String id){
+        int id2 = Integer.parseInt(id);
+        System.out.println(id2);
+        candyService.deleteCandy(id2);
+        return "redirect:/candy/index" ;
     }
 
 

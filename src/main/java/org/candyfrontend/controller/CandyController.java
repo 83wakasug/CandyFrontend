@@ -46,6 +46,16 @@ public class CandyController {
         }
         return "update.delete";
     }
+
+    @GetMapping("/edit/{id}")
+    public String edit(Model model,@PathVariable int id){
+
+        ResponseEntity<?> candyInfo=candyService.getCandy(id);
+
+        model.addAttribute("candy",candyInfo.getBody());
+
+        return "edit";
+    }
     @GetMapping("/{id}")
     public ResponseEntity<?> findById( @PathVariable int id){
         return candyService.getCandy(id);

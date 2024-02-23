@@ -78,7 +78,7 @@ public class CandyController {
     }
 
     @PutMapping("/edit/{id}")
-    public String edit(Model model, @ModelAttribute @Validated Candy candy){
+    public String edit(Model model, @ModelAttribute @Validated Candy candy,@PathVariable String id){
         model.addAttribute("candy", candy);
         candyService.updateCandy(candy);
         return "redirect:/candy/index" ;

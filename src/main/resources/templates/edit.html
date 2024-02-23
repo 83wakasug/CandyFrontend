@@ -9,7 +9,7 @@
         <label class="text-danger" th:text="${error}"></label>
     </div>
     <h1>Edit Information</h1>
-    <form th:action="@{candy//edit/{id}}" th:object="${}" th:method="post">
+    <form th:action="@{candy/edit/{id}}" th:object="${candy}" th:method="post">
         <input type="hidden" th:field="*{id}" />
         <div>
             <div class="row mx-md-n5">
@@ -19,22 +19,22 @@
                 </div>
             </div>
             <div class="row mx-md-n5">
-                <div class="col-2 pt-3 border bg-light"></div>
+                <div class="col-2 pt-3 border bg-light">manufacturingCompany</div>
                 <div class="col py-2 border">
-                    <input type="text" class="form-control" th:field="*{address}">
+                    <input type="text" class="form-control" th:field="*{manufacturingCompany}">
                 </div>
             </div>
             <div class="row mx-md-n5">
-                <div class="col-2 pt-3 border bg-light">電話番号<span class="text-danger">※</span></div>
+                <div class="col-2 pt-3 border bg-light">price<span class="text-danger">※</span></div>
                 <div class="col py-2 border">
-                    <input type="text" class="form-control" th:field="*{phone}">
+                    <input type="text" class="form-control" th:field="*{price}">
                 </div>
             </div>
         </div>
         <br />
         <div class="text-center">
-            <input type="submit" class="btn btn-primary" value="　保存　">
-            <a th:href="@{/user/{id}(id=*{id})}" class="btn btn-secondary">キャンセル</a>
+            <input type="submit" class="btn btn-primary" value="　save　">
+
         </div>
     </form>
 </div>

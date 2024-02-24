@@ -155,3 +155,60 @@ form input[type="text"] {
 button {
     margin-top: 10px; /* Added margin-top */
 }
+/* Add some styling for form elements */
+.edit-btn,
+.delete-btn {
+    display: inline-block;
+    padding: 10px 15px;
+    text-align: center;
+    text-decoration: none;
+    font-size: 16px;
+    margin-right: 5px;
+    cursor: pointer;
+    color: #fff; /* Set text color to white */
+}
+
+.edit-btn {
+    background-color: dodgerblue; /* Set background color for Edit button */
+}
+
+.delete-btn {
+    background-color: hotpink; /* Set background color for Delete button */
+}
+
+.edit-btn:hover,
+.delete-btn:hover {
+    background-color: gold; /* Set background color on hover */
+}
+
+    .btn-primary {
+        background-color: dodgerblue;
+        color: #fff;
+        border: none;
+        padding: 10px 15px;
+        font-size: 16px;
+        transition: background-color 0.3s; /* Smooth background color transition on hover */
+    }
+
+    .btn-primary:hover {
+        background-color: deepskyblue;
+    }
+
+    /* Secondary button style */
+    .btn-secondary {
+        background-color: darkgray;
+        color: #fff;
+        border: none;
+        padding: 10px 15px;
+        font-size: 16px;
+        transition: background-color 0.3s; /* Smooth background color transition on hover */
+    }
+
+    .btn-secondary:hover {
+        background-color: dimgray;
+    }
+
+.form-buttons {
+    display: flex;
+    justify-content: space-between; /* Add space between the buttons */
+}

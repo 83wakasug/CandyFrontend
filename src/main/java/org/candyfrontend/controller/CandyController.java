@@ -9,7 +9,6 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.validation.BindingResult;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
@@ -79,29 +78,28 @@ public class CandyController {
 
     @PostMapping("/create")
     @ResponseStatus(HttpStatus.CREATED)
-    public String addCandy(@ModelAttribute @Validated CandyDto candyDto, BindingResult result,Model model){
+    public String addCandy(@ModelAttribute @Validated CandyDto candyDto){
          var candy= mapper.map(candyDto,Candy.class);
+        System.out.println(candy+"whichdata? ");
          ResponseEntity<?> addedCandy =candyService.addCandy(candy);
-        System.out.println(addedCandy.getBody());
 
-        return "redirect:/candy/index";
+        return "redirect:/candy/edit";
     }
 
     @GetMapping("edit/data/{id}")
-    public String edit(Model model, @ModelAttribute @Validated Candy candy,@PathVariable String id){
+    public String edit(Model model, @ModelAttribute @Validated Candy candy){
         model.addAttribute("candy", candy);
         System.out.println(candy.getId()+candy.getName());
         candyService.updateCandy(candy);
         System.out.println(candy+"put");
-        return "redirect:/candy/index" ;
+        return "redirect:/candy/edit" ;
     }
 
     @GetMapping("/delete/{id}")
     public String delete(@PathVariable String id){
         int id2 = Integer.parseInt(id);
-        System.out.println(id2);
         candyService.deleteCandy(id2);
-        return "redirect:/candy/index" ;
+        return "redirect:/candy/edit" ;
     }
 
 

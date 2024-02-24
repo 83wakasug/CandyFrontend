@@ -33,10 +33,10 @@
         <td><span th:text="${candy.manufacturingCompany}"> ManufacturingCompany </span></td>
         <td><span th:text="${candy.price}"> Price </span></td>
         <td>
-         <a class="btn"
+         <a class="btn edit-btn"
             th:href="@{edit/{id} (id=${candy.id})}">Edit</a>
 
-         <a class="btn"
+         <a class="btn delete-btn"
             th:href="@{delete/{id} (id=${candy.id})}">Delete</a>
 
          </td>

@@ -46,13 +46,35 @@ public class CandyController {
         return "update.delete";
     }
 
+    @GetMapping("/searchEntry")
+    public String searchEntry(Model model){
+
+        ResponseEntity<ArrayList<Candy>> responseEntity = (ResponseEntity<ArrayList<Candy>>) candyService.getCandyList();
+
+        if (responseEntity.getStatusCode().is2xxSuccessful()) {
+            ArrayList<Candy> candyList = responseEntity.getBody();
+            model.addAttribute("candy", candyList);
+        } else {
+            // Handle the error case if needed
+            model.addAttribute("candy", null);
+        }
+        return "search";
+    }
+
+    @GetMapping("/searchEntry/{id}")
+    public String searchEntryById(Model model,@PathVariable int id){
+        ResponseEntity<?> candyInfo= candyService.getCandy(id);
+        model.addAttribute("candy",candyInfo.getBody());
+
+        return "candyEntry";
+    }
+
     @GetMapping("/edit/{id}")
     public String edit(Model model,@PathVariable int id){
 
         ResponseEntity<?> candyInfo=candyService.getCandy(id);
 
         model.addAttribute("candy",candyInfo.getBody());
-        System.out.println(candyInfo.getBody());
         return "edit";
     }
     @GetMapping("/{id}")

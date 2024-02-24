@@ -1,10 +1,54 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:margin="http://www.w3.org/1999/xhtml">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title>edit</title>
+
+    <link rel="stylesheet" th:href="@{/default.css}" >
 </head>
+
 <body>
+<div>
+    <nav>
+        <ul class="index">
+            <li><a href="http://localhost:8081/candy/index">Main page</a></li>
+            <li><a href="search.html">Search entry</a></li>
+            <li><a href="http://localhost:8081/candy/all">List All data</a></li>
+            <li><a href="http://localhost:8081/candy/add">Create an Entry</a></li>
+            <li><a href="http://localhost:8081/candy/edit">Update/Delete an Entry</a></li>
+        </ul>
+    </nav>
+</div>
+<div>
+    <div th:if="${validationError}" th:each="error : ${validationError}">
+        <label class="text-danger" th:text="${error}"></label>
+    </div>
+
+    <form th:action="@{searchEntry/{id}}" th:object="${candy}" th:method="get">
+        <input type="hidden" th:field="*{id}" />
+
+        <table>
+            <tr>
+                <td>Name<span class="text-danger">※</span></td>
+                <td><input type="text" th:field="*{name}" /></td>
+            </tr>
+            <tr>
+                <td>Manufacturing Company</td>
+                <td><input type="text" th:field="*{manufacturingCompany}" /></td>
+            </tr>
+            <tr>
+                <td>Price<span class="text-danger">※</span></td>
+                <td><input type="text" th:field="*{price}" /></td>
+            </tr>
+        </table>
+
+        <br/>
+        <div>
+            <input type="submit" value="Save">
+        </div>
+    </form>
+</div>
 
 </body>
 </html>

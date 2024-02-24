@@ -10,7 +10,7 @@
     <body>
     <nav>
         <ul class="index">
-
+            <li><a href="http://localhost:8081/candy/index">Main page</a></li>
             <li><a href="search.html">Search data</a></li>
             <li><a href="http://localhost:8081/candy/all">List All data</a></li>
             <li><a href="http://localhost:8081/candy/add">Create an Entry</a></li>
@@ -32,7 +32,6 @@
                                     type="text"
                                     name="name"
                                     th:field="*{name}"
-                                    class="form-control"
                                     placeholder="Enter product name"
                                     required
                             />
@@ -47,11 +46,9 @@
                                     type="text"
                                     name="name"
                                     th:field="*{manufacturingCompany}"
-                                    class="form-control"
                                     placeholder="Enter manufacturingCompany name"
                                     required
                             />
-
                         </div>
                     </div>
 
@@ -61,22 +58,19 @@
                             <input type="text"
                                    name="price"
                                    th:field="*{price}"
-                                   class="form-control"
                                    placeholder="Enter price"
                                    required
                             >
+                            <span class="text-danger" th:if="${#fields.hasErrors('price')}" th:errors="*{price}"></span>
                         </div>
                     </div>
 
-                    <div>
+                    <div class="form-buttons">
                         <div>
                             <button type="submit" class="btn btn-primary">Create</button>
                         </div>
                         <div>
-                            <a th:href="@{/candy/edit}" role="button"><button type="button">Cancel</button></a>
-                        </div>
-                        <div>
-                            <a th:href="@{/candy}" role="button"><button type="button">Main Page</button></a>
+                            <a th:href="@{/candy/edit}" role="button"><button type="button"  class="btn btn-secondary">Cancel</button></a>
                         </div>
                     </div>
                 </form>

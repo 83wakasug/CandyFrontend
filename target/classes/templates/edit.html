@@ -8,52 +8,47 @@
     <link rel="stylesheet" th:href="@{/default.css}" >
 </head>
 
-<body>
-<nav>
-    <ul class="index">
-
-        <li><a href="search.html">Search data</a></li>
-        <li><a href="http://localhost:8081/candy/all">List All data</a></li>
-        <li><a href="http://localhost:8081/candy/add">Create an Entry</a></li>
-        <li><a href="http://localhost:8081/candy/edit">Update/Delete an Entry</a></li>
-
-
-    </ul>
-</nav>
-
-<div class="container">
+ <body>
+        <div>
+            <nav>
+                 <ul class="index">
+                     <li><a href="http://localhost:8081/candy/index">Main page</a></li>
+                    <li><a href="search.html">Search data</a></li>
+                    <li><a href="http://localhost:8081/candy/all">List All data</a></li>
+                    <li><a href="http://localhost:8081/candy/add">Create an Entry</a></li>
+                    <li><a href="http://localhost:8081/candy/edit">Update/Delete an Entry</a></li>
+                 </ul>
+            </nav>
+        </div>
+<div>
     <div th:if="${validationError}" th:each="error : ${validationError}">
         <label class="text-danger" th:text="${error}"></label>
     </div>
-    <h1>Edit Information</h1>
-    <form th:action="@{data/{id}}" th:object="${candy}" th:method="get">
-        <input type="hidden" th:field="*{id}" />
-        <div>
-            <div class="row mx-md-n5">
-                <div class="col-2 pt-3 border bg-light">Name<span class="text-danger">※</span></div>
-                <div class="col py-2 border">
-                    <input type="text" class="form-control" th:field="*{name}">
-                </div>
-            </div>
-            <div class="row mx-md-n5">
-                <div class="col-2 pt-3 border bg-light">manufacturingCompany</div>
-                <div class="col py-2 border">
-                    <input type="text" class="form-control" th:field="*{manufacturingCompany}">
-                </div>
-            </div>
-            <div class="row mx-md-n5">
-                <div class="col-2 pt-3 border bg-light">price<span class="text-danger">※</span></div>
-                <div class="col py-2 border">
-                    <input type="text" class="form-control" th:field="*{price}">
-                </div>
-            </div>
-        </div>
-        <br />
-        <div class="text-center">
-            <input type="submit" class="btn btn-primary" value="　save　">
 
-        </div>
-    </form>
-</div>
+        <form th:action="@{/data/{id}}" th:object="${candy}" th:method="get">
+            <input type="hidden" th:field="*{id}" />
+
+            <table>
+                <tr>
+                    <td>Name<span class="text-danger">※</span></td>
+                    <td><input type="text" th:field="*{name}" /></td>
+                </tr>
+                <tr>
+                    <td>Manufacturing Company</td>
+                    <td><input type="text" th:field="*{manufacturingCompany}" /></td>
+                </tr>
+                <tr>
+                    <td>Price<span class="text-danger">※</span></td>
+                    <td><input type="text" th:field="*{price}" /></td>
+                </tr>
+            </table>
+
+            <br/>
+            <div>
+                <input type="submit" value="Save">
+            </div>
+        </form>
+    </div>
+
 </body>
 </html>

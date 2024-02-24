@@ -1,39 +1,157 @@
-
-
 .top {
     height: 50px;
     background: black;
     color: aliceblue;
-
 }
+
 nav {
     width: 100%;
     height: 70px;
     background-color: dimgray;
     padding-top: 5px;
     box-sizing: border-box;
+    top: 0;
+    left: 0;
 }
 
 ul {
     display: flex;
+    padding: 0;
+    margin: 0;
 }
+
 li {
     list-style: none;
 }
+
 a {
     display: block;
     text-decoration: none;
-    font-family: "Times New Roman",times,Serif;
-    font-size: 30px;
+    font-family: "Times New Roman", times, Serif;
+    font-size: 18px; /* Adjusted font size */
     color: white;
-    margin-right: 35px;
+    margin-right: 25px; /* Adjusted margin */
+    padding: 10px; /* Added padding */
 }
 
 a:hover {
     color: rgb(214, 237, 248);
 }
 
+table {
+    width: 80%;
+    margin: 20px auto;
+    border-collapse: collapse;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+table, th, td {
+    border: 1px solid #ddd;
+}
+
+th, td {
+    padding: 15px;
+    text-align: left;
+}
+
+th {
+    background-color: #f2f2f2;
+}
+
+/* Add some styling for form elements */
+form {
+    width: 80%;
+    margin: 20px auto;
+}
+
+form table {
+    width: 100%;
+    margin: 0;
+}
+
+form table td {
+    padding: 10px;
+}
+
+form input[type="text"] {
+    width: 100%;
+    padding: 8px;
+    box-sizing: border-box;
+}
+
+/* Reset some default browser styles */
+body, h2, label, button {
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: "Times New Roman", times, Serif;
+}
+
+.top {
+    height: 50px;
+    background: black;
+    color: aliceblue;
+}
+
 nav {
+    width: 100%;
+    height: 70px;
+    background-color: dimgray;
+    padding-top: 10px; /* Adjusted padding */
+    box-sizing: border-box;
     top: 0;
     left: 0;
+}
+
+ul {
+    display: flex;
+    padding: 0;
+    margin: 0;
+}
+
+li {
+    list-style: none;
+}
+
+a {
+    display: block;
+    text-decoration: none;
+    font-size: 18px;
+    color: white;
+    margin-right: 25px;
+    padding: 10px;
+}
+
+a:hover {
+    color: rgb(214, 237, 248);
+}
+
+/* Style the form */
+form {
+    width: 80%;
+    margin: 20px auto;
+}
+
+form table {
+    width: 100%;
+    margin: 0;
+    border-collapse: collapse; /* Added border-collapse */
+}
+
+form table td {
+    padding: 10px;
+    border: 1px solid #ddd; /* Added border */
+}
+
+form input[type="text"] {
+    width: 100%;
+    padding: 8px;
+    box-sizing: border-box;
+    margin-top: 5px; /* Added margin-top */
+}
+
+button {
+    margin-top: 10px; /* Added margin-top */
 }

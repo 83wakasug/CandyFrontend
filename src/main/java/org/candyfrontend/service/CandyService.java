@@ -57,7 +57,7 @@ public class CandyService implements CandyClient {
     public  ResponseEntity<?> updateCandy(Candy candy) {
         Map<String, Object> uriVariables = Collections.singletonMap("id", candy.getId());
         return restClient.put()
-                .uri("/update",uriVariables)
+                .uri("/{id}",uriVariables)
                 .contentType(MediaType.APPLICATION_JSON)
                 .accept(MediaType.APPLICATION_JSON)
                 .body(candy)

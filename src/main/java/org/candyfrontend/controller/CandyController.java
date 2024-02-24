@@ -53,7 +53,7 @@ public class CandyController {
         ResponseEntity<?> candyInfo=candyService.getCandy(id);
 
         model.addAttribute("candy",candyInfo.getBody());
-
+        System.out.println(candyInfo.getBody());
         return "edit";
     }
     @GetMapping("/{id}")
@@ -87,10 +87,12 @@ public class CandyController {
         return "redirect:/candy/index";
     }
 
-    @PutMapping("/edit/{id}")
+    @GetMapping("edit/data/{id}")
     public String edit(Model model, @ModelAttribute @Validated Candy candy,@PathVariable String id){
         model.addAttribute("candy", candy);
+        System.out.println(candy.getId()+candy.getName());
         candyService.updateCandy(candy);
+        System.out.println(candy+"put");
         return "redirect:/candy/index" ;
     }
 

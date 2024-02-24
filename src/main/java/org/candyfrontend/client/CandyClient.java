@@ -21,13 +21,13 @@ public interface CandyClient {
     @PostExchange("/")
     ResponseEntity<?> addCandy(@RequestBody Candy candy);
 
-    @PutExchange("/")
- ResponseEntity<?> updateCandy(Candy update);
+    @PutExchange("/{id}")
+    ResponseEntity<?> updateCandy(@RequestBody Candy update);
 
 
 
     @DeleteExchange("/{id}")
-    public ResponseEntity<?> deleteCandy(@PathVariable long id);
+    ResponseEntity<?> deleteCandy(@PathVariable long id);
 
 
 }

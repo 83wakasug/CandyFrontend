@@ -3,8 +3,22 @@
 <head>
     <meta charset="UTF-8">
     <title>Candy Inventory All Data</title>
-</head>
+    <head>
+
+        <link rel="stylesheet" th:href="@{/default.css}" >
+    </head>
 <body>
+<nav>
+    <ul class="index">
+
+        <li><a href="search.html">Search data</a></li>
+        <li><a href="http://localhost:8081/candy/all">List All data</a></li>
+        <li><a href="http://localhost:8081/candy/add">Create an Entry</a></li>
+        <li><a href="http://localhost:8081/candy/edit">Update/Delete an Entry</a></li>
+
+
+    </ul>
+</nav>
 
 <table>
     <thead>
@@ -25,7 +39,7 @@
             th:href="@{edit/{id} (id=${candy.id})}">Edit</a>
 
          <a class="btn"
-            th:href="@{candy/delete/{id} (id=${candy.id})}">Delete</a>
+            th:href="@{delete/{id} (id=${candy.id})}">Delete</a>
 
          </td>
         </form>

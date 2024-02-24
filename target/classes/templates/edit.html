@@ -1,7 +1,26 @@
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>edit</title>
+
+    <link rel="stylesheet" th:href="@{/default.css}" >
+</head>
+
 <body>
+<nav>
+    <ul class="index">
+
+        <li><a href="search.html">Search data</a></li>
+        <li><a href="http://localhost:8081/candy/all">List All data</a></li>
+        <li><a href="http://localhost:8081/candy/add">Create an Entry</a></li>
+        <li><a href="http://localhost:8081/candy/edit">Update/Delete an Entry</a></li>
+
+
+    </ul>
+</nav>
+
 <div class="container">
     <div th:if="${validationError}" th:each="error : ${validationError}">
         <label class="text-danger" th:text="${error}"></label>

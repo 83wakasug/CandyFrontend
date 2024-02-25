@@ -104,8 +104,8 @@ public class CandyController {
          var candy= mapper.map(candyDto,Candy.class);
         System.out.println(candy+"whichdata? ");
          ResponseEntity<?> addedCandy =candyService.addCandy(candy);
-
-        return "redirect:/candy/edit";
+        System.out.println(addedCandy+"addcandy");
+        return "redirect:/candy/add";
     }
 
     @GetMapping("edit/data/{id}")

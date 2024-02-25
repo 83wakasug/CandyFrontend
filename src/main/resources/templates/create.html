@@ -11,7 +11,7 @@
     <nav>
         <ul class="index">
             <li><a href="http://localhost:8081/candy/index">Main page</a></li>
-            <li><a href="search.html">Search data</a></li>
+            <li><a href="http://localhost:8081/candy/searchEntry">Search data</a></li>
             <li><a href="http://localhost:8081/candy/all">List All data</a></li>
             <li><a href="http://localhost:8081/candy/add">Create an Entry</a></li>
             <li><a href="http://localhost:8081/candy/edit">Update/Delete an Entry</a></li>
@@ -70,7 +70,7 @@
                             <button type="submit" class="btn btn-primary">Create</button>
                         </div>
                         <div>
-                            <a th:href="@{/candy/edit}" role="button"><button type="button"  class="btn btn-secondary">Cancel</button></a>
+                            <a th:href="@{/candy/add}" role="button"><button type="button"  class="btn btn-secondary">Cancel</button></a>
                         </div>
                     </div>
                 </form>

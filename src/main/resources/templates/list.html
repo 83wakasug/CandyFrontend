@@ -11,7 +11,7 @@
 <nav>
     <ul class="index">
         <li><a href="http://localhost:8081/candy/index">Main page</a></li>
-        <li><a href="search.html">Search data</a></li>
+        <li><a href="http://localhost:8081/candy/searchEntry">Search data</a></li>
         <li><a href="http://localhost:8081/candy/all">List All data</a></li>
         <li><a href="http://localhost:8081/candy/add">Create an Entry</a></li>
         <li><a href="http://localhost:8081/candy/edit">Update/Delete an Entry</a></li>
@@ -30,7 +30,7 @@
     </thead>
     <tbody>
     <tr th:if="${candy.empty}">
-        <td colspan="2"> No Candy Available </td>
+        <td colspan="2"> Do not find any information </td>
     </tr>
     <tr th:each="candy : ${candy}">
         <td><span th:text="${candy.name}"> Name </span></td>

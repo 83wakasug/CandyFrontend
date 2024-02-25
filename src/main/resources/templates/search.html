@@ -4,7 +4,6 @@
 <head>
     <meta charset="UTF-8">
     <title>edit</title>
-
     <link rel="stylesheet" th:href="@{/default.css}" >
 </head>
 
@@ -13,7 +12,7 @@
     <nav>
         <ul class="index">
             <li><a href="http://localhost:8081/candy/index">Main page</a></li>
-            <li><a href="search.html">Search entry</a></li>
+            <li><a href="http://localhost:8081/candy/searchEntry">Search entry</a></li>
             <li><a href="http://localhost:8081/candy/all">List All data</a></li>
             <li><a href="http://localhost:8081/candy/add">Create an Entry</a></li>
             <li><a href="http://localhost:8081/candy/edit">Update/Delete an Entry</a></li>
@@ -25,27 +24,28 @@
         <label class="text-danger" th:text="${error}"></label>
     </div>
 
-    <form th:action="@{searchEntry/{id}}" th:object="${candy}" th:method="get">
-        <input type="hidden" th:field="*{id}" />
-
+    <form th:action="@{searchEntry}" th:method="get">
         <table>
+            <thead>
             <tr>
-                <td>Name<span class="text-danger">※</span></td>
-                <td><input type="text" th:field="*{name}" /></td>
+                <th>ID<span class="text-danger">※</span></th>
+                <th>Name<span class="text-danger">※</span></th>
             </tr>
-            <tr>
-                <td>Manufacturing Company</td>
-                <td><input type="text" th:field="*{manufacturingCompany}" /></td>
+            </thead>
+            <tbody>
+            <tr th:if="${candy.empty}">
+                <td colspan="2">No information found</td>
             </tr>
-            <tr>
-                <td>Price<span class="text-danger">※</span></td>
-                <td><input type="text" th:field="*{price}" /></td>
+            <tr th:each="candyItem : ${candy}">
+                <td><input type="number" th:field="${candyItem.id}" /></td>
+                <td><input type="text" th:field="${candyItem.name}" /></td>
             </tr>
+            </tbody>
         </table>
 
         <br/>
         <div>
-            <input type="submit" value="Save">
+            <input type="submit" value="Details">
         </div>
     </form>
 </div>

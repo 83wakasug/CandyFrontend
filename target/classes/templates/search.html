@@ -1,10 +1,54 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:margin="http://www.w3.org/1999/xhtml">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title>edit</title>
+    <link rel="stylesheet" th:href="@{/default.css}" >
 </head>
+
 <body>
+<div>
+    <nav>
+        <ul class="index">
+            <li><a href="http://localhost:8081/candy/index">Main page</a></li>
+            <li><a href="http://localhost:8081/candy/searchEntry">Search entry</a></li>
+            <li><a href="http://localhost:8081/candy/all">List All data</a></li>
+            <li><a href="http://localhost:8081/candy/add">Create an Entry</a></li>
+            <li><a href="http://localhost:8081/candy/edit">Update/Delete an Entry</a></li>
+        </ul>
+    </nav>
+</div>
+<div>
+    <div th:if="${validationError}" th:each="error : ${validationError}">
+        <label class="text-danger" th:text="${error}"></label>
+    </div>
+
+    <form th:action="@{searchEntry}" th:method="get">
+        <table>
+            <thead>
+            <tr>
+                <th>ID<span class="text-danger">※</span></th>
+                <th>Name<span class="text-danger">※</span></th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:if="${candy.empty}">
+                <td colspan="2">No information found</td>
+            </tr>
+            <tr th:each="candyItem : ${candy}">
+                <td><input type="number" th:field="${candyItem.id}" /></td>
+                <td><input type="text" th:field="${candyItem.name}" /></td>
+            </tr>
+            </tbody>
+        </table>
+
+        <br/>
+        <div>
+            <input type="submit" value="Details">
+        </div>
+    </form>
+</div>
 
 </body>
 </html>

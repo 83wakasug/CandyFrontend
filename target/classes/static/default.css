@@ -3,6 +3,9 @@ body, h2, label, button {
     margin: 0;
     padding: 0;
 }
+#h2{
+    text-align:center;
+}
 
 body {
     font-family: "Times New Roman", times, Serif;
@@ -109,12 +112,14 @@ form input[type="text"] {
 }
 
 .delete-btn {
-    background-color: hotpink;
+    background-color: dimgray;
 }
 
-.edit-btn:hover,
-.delete-btn:hover {
-    background-color: gold;
+.delete-btn:hover{
+    background-color: darkgray;
+}
+.edit-btn:hover {
+    background-color: deepskyblue;
 }
 
 /* Primary button style */
@@ -159,4 +164,21 @@ form input[type="text"] {
     font-size: 16px;
     transition: background-color 0.3s;
     margin-right: 120px;
+}
+
+.btn-search{
+    background-color: dodgerblue;
+    color: #fff;
+    border: none;
+    padding: 10px 15px;
+    font-size: 16px;
+    transition: background-color 0.3s;
+    display:inline-block;
+}
+
+.btn-search:hover {
+    background-color: deepskyblue;
+}
+#center{
+    text-align: center;
 }

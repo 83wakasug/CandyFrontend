@@ -17,8 +17,8 @@
     </ul>
 </nav>
 <h1>Something went wrong...try again!</h1>
-<h1 th:if="${errorMessage.getAttribute('javax.servlet.error.status_code') == 400}">Client Error: Bad Request</h1>
-<h1 th:if="${errorMessage.getAttribute('javax.servlet.error.status_code') == 500}">Server Error: Internal Server Error</h1>
-<h1 th:unless="${errorMessage.getAttribute('javax.servlet.error.status_code') == 400 or errorMessage.getAttribute('javax.servlet.error.status_code') == 500}">Something went wrong... try again!</h1>
+<h1 th:if="${message}">Client Error: Bad Request</h1>
+<h1 th:if="${message}">Server Error: Internal Server Error</h1>
+<h1 th:unless="${message}">Unkonw error</h1>
 </body>
 </html>

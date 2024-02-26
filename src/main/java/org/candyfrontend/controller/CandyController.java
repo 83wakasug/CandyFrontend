@@ -11,6 +11,7 @@ import org.springframework.ui.Model;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 import java.util.ArrayList;
+import java.util.List;
 
 @Controller
 @RequestMapping("/candy")
@@ -33,23 +34,14 @@ public class CandyController {
     @GetMapping("/edit")
     public String edit_delete(Model model){
 
-        ResponseEntity<ArrayList<Candy>> responseEntity = (ResponseEntity<ArrayList<Candy>>) candyService.getCandyList();
+        ResponseEntity<?> responseEntity = candyService.getCandyList();
 
 
         if (responseEntity.getStatusCode().is2xxSuccessful()) {
-            ArrayList<Candy> candyList = responseEntity.getBody();
-
-           if(! candyList.isEmpty()) model.addAttribute("candy", candyList);
-            else model.addAttribute("candy", null);
-        } else if (responseEntity.getStatusCode().is5xxServerError()) {
-            return "error";
-
-        } else if (responseEntity.getStatusCode().is4xxClientError()) {
-            return "error";
-
+            ArrayList<Candy> candyList = (ArrayList<Candy>) responseEntity.getBody();
+            model.addAttribute("candy", candyList);
         } else {
-            // Handle the error case if needed
-            model.addAttribute("errorMessage", "An unexpected error occurred.");
+            handleErrorResponse(model,responseEntity);
             return "error";
         }
         return "update.delete";
@@ -58,20 +50,13 @@ public class CandyController {
     @GetMapping("/searchEntry")
     public String searchEntry(Model model){
 
-        ResponseEntity<ArrayList<Candy>> responseEntity = (ResponseEntity<ArrayList<Candy>>) candyService.getCandyList();
+        ResponseEntity<?> responseEntity =candyService.getCandyList();
 
         if (responseEntity.getStatusCode().is2xxSuccessful()) {
-            ArrayList<Candy> candyList = responseEntity.getBody();
+            ArrayList<Candy> candyList = (ArrayList<Candy>) responseEntity.getBody();
             model.addAttribute("candy", candyList);
-        } else if (responseEntity.getStatusCode().is5xxServerError()) {
-            return "error";
-
-        } else if (responseEntity.getStatusCode().is4xxClientError()) {
-            return "error";
-
         } else {
-            // Handle the error case if needed
-            model.addAttribute("errorMessage", "An unexpected error occurred.");
+            handleErrorResponse(model,responseEntity);
             return "error";
         }
         return "search";
@@ -81,16 +66,9 @@ public class CandyController {
     public String searchEntryById(Model model, @PathVariable Long id){
         ResponseEntity<?> candyInfo= candyService.getCandy(id);
         if(candyInfo.getStatusCode().is2xxSuccessful())
-        model.addAttribute("candy",candyInfo.getBody());
-        else if (candyInfo.getStatusCode().is5xxServerError()) {
-            return "error";
-
-        } else if (candyInfo.getStatusCode().is4xxClientError()) {
-            return "error";
-
-        } else {
-            // Handle the error case if needed
-            model.addAttribute("errorMessage", "An unexpected error occurred.");
+            model.addAttribute("candy",candyInfo.getBody());
+        else {
+            handleErrorResponse(model,candyInfo);
             return "error";
         }
         return "candyEntry";
@@ -103,15 +81,8 @@ public class CandyController {
         if(candyInfo.getStatusCode().is2xxSuccessful()) {
             model.addAttribute("candy", candyInfo.getBody());
         }
-        else if (candyInfo.getStatusCode().is5xxServerError()) {
-            return "error";
-
-        } else if (candyInfo.getStatusCode().is4xxClientError()) {
-            return "error";
-
-        } else {
-            // Handle the error case if needed
-            model.addAttribute("errorMessage", "An unexpected error occurred.");
+        else {
+            handleErrorResponse(model,candyInfo);
             return "error";
         }
         return "edit";
@@ -124,19 +95,12 @@ public class CandyController {
     @GetMapping("/all")
     public String findAll(Model model) {
 
-        ResponseEntity<ArrayList<Candy>> responseEntity = (ResponseEntity<ArrayList<Candy>>) candyService.getCandyList();
+        ResponseEntity<List> responseEntity = candyService.getCandyList();
         if (responseEntity.getStatusCode().is2xxSuccessful()) {
-            ArrayList<Candy> candyList = responseEntity.getBody();
+            ArrayList<Candy> candyList = (ArrayList<Candy>) responseEntity.getBody();
             model.addAttribute("candy", candyList);
-        }  else if (responseEntity.getStatusCode().is5xxServerError()) {
-            return "error";
-
-        } else if (responseEntity.getStatusCode().is4xxClientError()) {
-            return "error";
-
-        } else {
-            // Handle the error case if needed
-            model.addAttribute("errorMessage", "An unexpected error occurred.");
+        }  else {
+            handleErrorResponse(model,responseEntity);
             return "error";
         }
 
@@ -145,20 +109,13 @@ public class CandyController {
 
     @PostMapping("/create/add")
     public String createData(@ModelAttribute @Validated CandyDto candyDto,Model model ){
-         var candy= mapper.map(candyDto,Candy.class);
-         ResponseEntity<?> addedCandy =candyService.addCandy(candy);
+        var candy= mapper.map(candyDto,Candy.class);
+        ResponseEntity<?> addedCandy =candyService.addCandy(candy);
         if (addedCandy.getStatusCode().is2xxSuccessful()){
             return "redirect:/candy/create";
         }
-         else if (addedCandy.getStatusCode().is5xxServerError()) {
-            return "error";
-
-        } else if (addedCandy.getStatusCode().is4xxClientError()) {
-            return "error";
-
-        } else {
-            // Handle the error case if needed
-            model.addAttribute("errorMessage", "An unexpected error occurred.");
+        else {
+            handleErrorResponse(model,addedCandy);
             return "error";
         }
 
@@ -170,16 +127,9 @@ public class CandyController {
 
         ResponseEntity<?> updateCandy = candyService.updateCandy(candy);
         if (updateCandy.getStatusCode().is2xxSuccessful()){
-        return "redirect:/candy/edit" ;
-        }else if (updateCandy.getStatusCode().is5xxServerError()) {
-            return "error";
-
-        } else if (updateCandy.getStatusCode().is4xxClientError()) {
-            return "error";
-
-        } else {
-            // Handle the error case if needed
-            model.addAttribute("errorMessage", "An unexpected error occurred.");
+            return "redirect:/candy/edit" ;
+        }else {
+            handleErrorResponse(model,updateCandy);
             return "error";
         }
 
@@ -189,21 +139,23 @@ public class CandyController {
     public String delete(@PathVariable String id,Model model){
         int id2 = Integer.parseInt(id);
         ResponseEntity<?> deleteCandy=candyService.deleteCandy(id2);
-       if(deleteCandy.getStatusCode().is2xxSuccessful())
-        return "redirect:/candy/edit";
-         else if (deleteCandy.getStatusCode().is5xxServerError()) {
-            return "error";
-
-        } else if (deleteCandy.getStatusCode().is4xxClientError()) {
-            return "error";
-
-        } else {
-            // Handle the error case if needed
-            model.addAttribute("errorMessage", "An unexpected error occurred.");
-            return "error";
+        if(deleteCandy.getStatusCode().is2xxSuccessful())
+            return "redirect:/candy/edit";
+        else {
+            handleErrorResponse(model,deleteCandy);
+        return "error";
         }
     }
 
-
+    private void handleErrorResponse(Model model, ResponseEntity<?> responseEntity) {
+        System.out.println(responseEntity.getStatusCode());
+        if (responseEntity.getStatusCode().is5xxServerError()) {
+            model.addAttribute("message", "Server Error");
+        } else if (responseEntity.getStatusCode().is4xxClientError()) {
+            model.addAttribute("message", "Client Error");
+        } else {
+            model.addAttribute("message", "An unexpected error occurred.");
+        }
+    }
 
 }

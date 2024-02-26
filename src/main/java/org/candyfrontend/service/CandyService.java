@@ -7,6 +7,7 @@ import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestClient;
+
 import java.util.Collections;
 import java.util.List;
 import java.util.Map;
@@ -32,7 +33,7 @@ public class CandyService implements CandyClient {
     }
 
     @Override
-    public ResponseEntity<?> getCandyList() {
+    public ResponseEntity<List> getCandyList() {
         return restClient.get()
                 .uri("/all")
                 .accept(MediaType.APPLICATION_JSON)

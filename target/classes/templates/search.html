@@ -14,41 +14,32 @@
             <li><a href="http://localhost:8081/candy/index">Main page</a></li>
             <li><a href="http://localhost:8081/candy/searchEntry">Search entry</a></li>
             <li><a href="http://localhost:8081/candy/all">List All data</a></li>
-            <li><a href="http://localhost:8081/candy/add">Create an Entry</a></li>
+            <li><a href="http://localhost:8081/candy/create">Create an Entry</a></li>
             <li><a href="http://localhost:8081/candy/edit">Update/Delete an Entry</a></li>
         </ul>
     </nav>
-</div>
-<div>
-    <div th:if="${validationError}" th:each="error : ${validationError}">
-        <label class="text-danger" th:text="${error}"></label>
-    </div>
 
-    <form th:action="@{searchEntry}" th:method="get">
-        <table>
-            <thead>
-            <tr>
-                <th>ID<span class="text-danger">※</span></th>
-                <th>Name<span class="text-danger">※</span></th>
-            </tr>
-            </thead>
-            <tbody>
-            <tr th:if="${candy.empty}">
-                <td colspan="2">No information found</td>
-            </tr>
-            <tr th:each="candyItem : ${candy}">
-                <td><input type="number" th:field="${candyItem.id}" /></td>
-                <td><input type="text" th:field="${candyItem.name}" /></td>
-            </tr>
-            </tbody>
-        </table>
-
-        <br/>
-        <div>
-            <input type="submit" value="Details">
-        </div>
-    </form>
 </div>
+
+    <table>
+        <thead>
+        <tr>
+            <th> id </th>
+            <th> Name</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="candy : ${candy}">
+            <form th:action="@{searchEntry/{id}(id=${candy.id})}" method="get">
+                <td><span th:text="${candy.id}"> id </span></td>
+                <td><span th:text="${candy.name}"> Name </span></td>
+                <td>
+                    <input type="submit" value="Details" class= "btn btn-primary">
+                </td>
+            </form>
+        </tr>
+        </tbody>
+    </table>
 
 </body>
 </html>

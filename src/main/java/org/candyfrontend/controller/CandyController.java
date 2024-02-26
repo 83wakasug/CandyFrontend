@@ -11,8 +11,16 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.servlet.function.RequestPredicate;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import java.net.URI;
+import java.nio.file.Path;
 import java.util.ArrayList;
+
+import static org.springframework.web.servlet.function.RequestPredicates.path;
+
 @Controller
 @RequestMapping("/candy")
 @RequiredArgsConstructor
@@ -25,9 +33,9 @@ public class CandyController {
         return "index";
     }
 
-    @GetMapping("/add")
+    @GetMapping("/create")
     public String create(Model model){
-        model.addAttribute("candyDto",new CandyDto());
+        model.addAttribute("candy", new Candy());
         return "create";
     }
 
@@ -62,8 +70,10 @@ public class CandyController {
     }
 
     @GetMapping("/searchEntry/{id}")
-    public String searchEntryById(Model model,@PathVariable int id){
-        ResponseEntity<?> candyInfo= candyService.getCandy(id);
+    public String searchEntryById(Model model, @PathVariable Long id){
+
+
+        ResponseEntity<?> candyInfo= candyService.getCandy( id);
         model.addAttribute("candy",candyInfo.getBody());
 
         return "candyEntry";
@@ -78,7 +88,7 @@ public class CandyController {
         return "edit";
     }
     @GetMapping("/{id}")
-    public ResponseEntity<?> findById( @PathVariable int id){
+    public ResponseEntity<?> findById( @PathVariable long id){
         return candyService.getCandy(id);
     }
 
@@ -98,17 +108,16 @@ public class CandyController {
         return "list";
     }
 
-    @PostMapping("/create")
-    @ResponseStatus(HttpStatus.CREATED)
-    public String addCandy(@ModelAttribute @Validated CandyDto candyDto){
+    @PostMapping("/create/add")
+    public String createData(@ModelAttribute @Validated CandyDto candyDto){
          var candy= mapper.map(candyDto,Candy.class);
-        System.out.println(candy+"whichdata? ");
          ResponseEntity<?> addedCandy =candyService.addCandy(candy);
-        System.out.println(addedCandy+"addcandy");
-        return "redirect:/candy/add";
+
+        // Redirect to /candy/create
+        return "redirect:/candy/create";
     }
 
-    @GetMapping("edit/data/{id}")
+    @PostMapping("edit/data/{id}")
     public String edit(Model model, @ModelAttribute @Validated Candy candy){
         model.addAttribute("candy", candy);
         System.out.println(candy.getId()+candy.getName());

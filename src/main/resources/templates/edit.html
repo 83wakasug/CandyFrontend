@@ -15,7 +15,7 @@
                      <li><a href="http://localhost:8081/candy/index">Main page</a></li>
                     <li><a href="http://localhost:8081/candy/searchEntry">Search entry</a></li>
                     <li><a href="http://localhost:8081/candy/all">List All data</a></li>
-                    <li><a href="http://localhost:8081/candy/add">Create an Entry</a></li>
+                    <li><a href="http://localhost:8081/candy/create">Create an Entry</a></li>
                     <li><a href="http://localhost:8081/candy/edit">Update/Delete an Entry</a></li>
                  </ul>
             </nav>
@@ -25,7 +25,7 @@
         <label class="text-danger" th:text="${error}"></label>
     </div>
 
-        <form th:action="@{data/{id}}" th:object="${candy}" th:method="get">
+        <form th:action="@{data/{id}}" th:object="${candy}" th:method="post">
             <input type="hidden" th:field="*{id}" />
 
             <table>
@@ -45,7 +45,7 @@
 
             <br/>
             <div>
-                <input type="submit" value="Save">
+                <input type="submit" value="Save" class="btn btn-primary">
             </div>
         </form>
     </div>

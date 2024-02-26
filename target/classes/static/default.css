@@ -1,84 +1,3 @@
-.top {
-    height: 50px;
-    background: black;
-    color: aliceblue;
-}
-
-nav {
-    width: 100%;
-    height: 70px;
-    background-color: dimgray;
-    padding-top: 5px;
-    box-sizing: border-box;
-    top: 0;
-    left: 0;
-}
-
-ul {
-    display: flex;
-    padding: 0;
-    margin: 0;
-}
-
-li {
-    list-style: none;
-}
-
-a {
-    display: block;
-    text-decoration: none;
-    font-family: "Times New Roman", times, Serif;
-    font-size: 18px; /* Adjusted font size */
-    color: white;
-    margin-right: 25px; /* Adjusted margin */
-    padding: 10px; /* Added padding */
-}
-
-a:hover {
-    color: rgb(214, 237, 248);
-}
-
-table {
-    width: 80%;
-    margin: 20px auto;
-    border-collapse: collapse;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-}
-
-table, th, td {
-    border: 1px solid #ddd;
-}
-
-th, td {
-    padding: 15px;
-    text-align: left;
-}
-
-th {
-    background-color: #f2f2f2;
-}
-
-/* Add some styling for form elements */
-form {
-    width: 80%;
-    margin: 20px auto;
-}
-
-form table {
-    width: 100%;
-    margin: 0;
-}
-
-form table td {
-    padding: 10px;
-}
-
-form input[type="text"] {
-    width: 100%;
-    padding: 8px;
-    box-sizing: border-box;
-}
-
 /* Reset some default browser styles */
 body, h2, label, button {
     margin: 0;
@@ -99,7 +18,7 @@ nav {
     width: 100%;
     height: 70px;
     background-color: dimgray;
-    padding-top: 10px; /* Adjusted padding */
+    padding-top: 10px;
     box-sizing: border-box;
     top: 0;
     left: 0;
@@ -128,6 +47,26 @@ a:hover {
     color: rgb(214, 237, 248);
 }
 
+table {
+    width: 80%;
+    margin: 20px auto;
+    border-collapse: collapse;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+table, th, td {
+    border: 1px solid #ddd;
+}
+
+th, td {
+    padding: 15px;
+    text-align: left;
+}
+
+th {
+    background-color: #f2f2f2;
+}
+
 /* Style the form */
 form {
     width: 80%;
@@ -137,24 +76,21 @@ form {
 form table {
     width: 100%;
     margin: 0;
-    border-collapse: collapse; /* Added border-collapse */
+    border-collapse: collapse;
 }
 
 form table td {
     padding: 10px;
-    border: 1px solid #ddd; /* Added border */
+    border: 1px solid #ddd;
 }
 
 form input[type="text"] {
     width: 100%;
     padding: 8px;
     box-sizing: border-box;
-    margin-top: 5px; /* Added margin-top */
+    margin-top: 5px;
 }
 
-button {
-    margin-top: 10px; /* Added margin-top */
-}
 /* Add some styling for form elements */
 .edit-btn,
 .delete-btn {
@@ -165,50 +101,62 @@ button {
     font-size: 16px;
     margin-right: 5px;
     cursor: pointer;
-    color: #fff; /* Set text color to white */
+    color: #fff;
 }
 
 .edit-btn {
-    background-color: dodgerblue; /* Set background color for Edit button */
+    background-color: dodgerblue;
 }
 
 .delete-btn {
-    background-color: hotpink; /* Set background color for Delete button */
+    background-color: hotpink;
 }
 
 .edit-btn:hover,
 .delete-btn:hover {
-    background-color: gold; /* Set background color on hover */
+    background-color: gold;
 }
 
-    .btn-primary {
-        background-color: dodgerblue;
-        color: #fff;
-        border: none;
-        padding: 10px 15px;
-        font-size: 16px;
-        transition: background-color 0.3s; /* Smooth background color transition on hover */
-    }
+/* Primary button style */
+.btn-primary {
+    background-color: dodgerblue;
+    color: #fff;
+    border: none;
+    padding: 10px 15px;
+    font-size: 16px;
+    transition: background-color 0.3s;
+}
 
-    .btn-primary:hover {
-        background-color: deepskyblue;
-    }
+.btn-primary:hover {
+    background-color: deepskyblue;
+}
 
-    /* Secondary button style */
-    .btn-secondary {
-        background-color: darkgray;
-        color: #fff;
-        border: none;
-        padding: 10px 15px;
-        font-size: 16px;
-        transition: background-color 0.3s; /* Smooth background color transition on hover */
-    }
+/* Secondary button style */
+.btn-secondary {
+    background-color: darkgray;
+    color: #fff;
+    border: none;
+    padding: 10px 15px;
+    font-size: 16px;
+    transition: background-color 0.3s;
+}
 
-    .btn-secondary:hover {
-        background-color: dimgray;
-    }
+.btn-secondary:hover {
+    background-color: dimgray;
+}
 
 .form-buttons {
     display: flex;
-    justify-content: space-between; /* Add space between the buttons */
+    justify-content: space-between;
+}
+
+/* Additional styling for details button */
+.btn-details {
+    background-color: dodgerblue;
+    color: #fff;
+    border: none;
+    padding: 10px 15px;
+    font-size: 16px;
+    transition: background-color 0.3s;
+    margin-right: 120px;
 }

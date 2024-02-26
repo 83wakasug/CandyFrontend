@@ -1,0 +1,24 @@
+
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>error</title>
+    <link rel="stylesheet" th:href="@{/default.css}">
+</head>
+<body>
+<nav>
+    <ul class="index">
+        <li><a href="http://localhost:8081/candy/index">Main page</a></li>
+        <li><a href="http://localhost:8081/candy/searchEntry">Search data</a></li>
+        <li><a href="http://localhost:8081/candy/all">List All data</a></li>
+        <li><a href="http://localhost:8081/candy/create">Create an Entry</a></li>
+        <li><a href="http://localhost:8081/candy/edit">Update/Delete an Entry</a></li>
+    </ul>
+</nav>
+<h1>Something went wrong...try again!</h1>
+<h1 th:if="${errorMessage.getAttribute('javax.servlet.error.status_code') == 400}">Client Error: Bad Request</h1>
+<h1 th:if="${errorMessage.getAttribute('javax.servlet.error.status_code') == 500}">Server Error: Internal Server Error</h1>
+<h1 th:unless="${errorMessage.getAttribute('javax.servlet.error.status_code') == 400 or errorMessage.getAttribute('javax.servlet.error.status_code') == 500}">Something went wrong... try again!</h1>
+</body>
+</html>

@@ -33,7 +33,7 @@ public class CandyController {
 
     @GetMapping("/edit")
     public String edit_delete(Model model){
-
+        try{
         ResponseEntity<?> responseEntity = candyService.getCandyList();
 
 
@@ -44,27 +44,36 @@ public class CandyController {
             handleErrorResponse(model,responseEntity);
             return "error";
         }
-        return "update.delete";
+        return "update.delete";}catch (Exception e){
+
+            return tryCatch(e);
+        }
     }
 
     @GetMapping("/searchEntry")
     public String searchEntry(Model model){
+        try {
+            ResponseEntity<?> responseEntity =candyService.getCandyList();
 
-        ResponseEntity<?> responseEntity =candyService.getCandyList();
+            if (responseEntity.getStatusCode().is2xxSuccessful()) {
+                ArrayList<Candy> candyList = (ArrayList<Candy>) responseEntity.getBody();
+                model.addAttribute("candy", candyList);
+            } else {
+                handleErrorResponse(model,responseEntity);
+                return "error";
+            }
+            return "search";
+        }catch (Exception e){
 
-        if (responseEntity.getStatusCode().is2xxSuccessful()) {
-            ArrayList<Candy> candyList = (ArrayList<Candy>) responseEntity.getBody();
-            model.addAttribute("candy", candyList);
-        } else {
-            handleErrorResponse(model,responseEntity);
-            return "error";
+            return tryCatch(e);
+
         }
-        return "search";
+
     }
 
     @GetMapping("/searchEntry/{id}")
     public String searchEntryById(Model model, @PathVariable Long id){
-        ResponseEntity<?> candyInfo= candyService.getCandy(id);
+       try{ ResponseEntity<?> candyInfo= candyService.getCandy(id);
         if(candyInfo.getStatusCode().is2xxSuccessful())
             model.addAttribute("candy",candyInfo.getBody());
         else {
@@ -72,11 +81,15 @@ public class CandyController {
             return "error";
         }
         return "candyEntry";
+       }catch (Exception e){
+
+           return tryCatch(e);
+       }
     }
 
     @GetMapping("/edit/{id}")
     public String edit(Model model,@PathVariable int id){
-
+        try{
         ResponseEntity<?> candyInfo=candyService.getCandy(id);
         if(candyInfo.getStatusCode().is2xxSuccessful()) {
             model.addAttribute("candy", candyInfo.getBody());
@@ -85,70 +98,92 @@ public class CandyController {
             handleErrorResponse(model,candyInfo);
             return "error";
         }
-        return "edit";
+        return "edit";}catch (Exception e){
+            return tryCatch(e);
+        }
     }
     @GetMapping("/{id}")
     public ResponseEntity<?> findById( @PathVariable long id){
+
         return candyService.getCandy(id);
     }
 
     @GetMapping("/all")
     public String findAll(Model model) {
+        try {
+            ResponseEntity<List> responseEntity = candyService.getCandyList();
+            if (responseEntity.getStatusCode().is2xxSuccessful()) {
+                ArrayList<Candy> candyList = (ArrayList<Candy>) responseEntity.getBody();
+                model.addAttribute("candy", candyList);
+            }  else {
+                handleErrorResponse(model,responseEntity);
+                return "error";
+            }
 
-        ResponseEntity<List> responseEntity = candyService.getCandyList();
-        if (responseEntity.getStatusCode().is2xxSuccessful()) {
-            ArrayList<Candy> candyList = (ArrayList<Candy>) responseEntity.getBody();
-            model.addAttribute("candy", candyList);
-        }  else {
-            handleErrorResponse(model,responseEntity);
-            return "error";
+            return "list";
+        }catch (Exception e){
+           return tryCatch(e);
         }
 
-        return "list";
     }
 
     @PostMapping("/create/add")
     public String createData(@ModelAttribute @Validated CandyDto candyDto,Model model ){
-        var candy= mapper.map(candyDto,Candy.class);
-        ResponseEntity<?> addedCandy =candyService.addCandy(candy);
-        if (addedCandy.getStatusCode().is2xxSuccessful()){
-            return "redirect:/candy/create";
-        }
-        else {
-            handleErrorResponse(model,addedCandy);
-            return "error";
-        }
+       try {
+           var candy= mapper.map(candyDto,Candy.class);
+           ResponseEntity<?> addedCandy =candyService.addCandy(candy);
+           if (addedCandy.getStatusCode().is2xxSuccessful()){
+               return "redirect:/candy/create";
+           }
+           else {
+               handleErrorResponse(model,addedCandy);
+               return "error";
+           }
+       }catch(Exception e){
+           return tryCatch(e);
+       }
+
 
     }
 
     @PostMapping("edit/data/{id}")
     public String edit(Model model, @ModelAttribute @Validated Candy candy){
-        model.addAttribute("candy", candy);
+       try {
 
-        ResponseEntity<?> updateCandy = candyService.updateCandy(candy);
-        if (updateCandy.getStatusCode().is2xxSuccessful()){
+           model.addAttribute("candy", candy);
+
+         ResponseEntity<?> updateCandy = candyService.updateCandy(candy);
+            if (updateCandy.getStatusCode().is2xxSuccessful()){
             return "redirect:/candy/edit" ;
-        }else {
+            }else {
             handleErrorResponse(model,updateCandy);
             return "error";
-        }
+            }
+       }catch (Exception e){
+           return tryCatch(e);
+       }
 
     }
 
     @GetMapping("/delete/{id}")
     public String delete(@PathVariable String id,Model model){
-        int id2 = Integer.parseInt(id);
-        ResponseEntity<?> deleteCandy=candyService.deleteCandy(id2);
-        if(deleteCandy.getStatusCode().is2xxSuccessful())
-            return "redirect:/candy/edit";
-        else {
-            handleErrorResponse(model,deleteCandy);
-        return "error";
-        }
+       try {
+           int id2 = Integer.parseInt(id);
+           ResponseEntity<?> deleteCandy=candyService.deleteCandy(id2);
+           if(deleteCandy.getStatusCode().is2xxSuccessful())
+               return "redirect:/candy/edit";
+           else {
+               handleErrorResponse(model,deleteCandy);
+               return "error";
+           }
+       }catch (Exception e){
+           return tryCatch(e);
+       }
+
     }
 
     private void handleErrorResponse(Model model, ResponseEntity<?> responseEntity) {
-        System.out.println(responseEntity.getStatusCode());
+
         if (responseEntity.getStatusCode().is5xxServerError()) {
             model.addAttribute("message", "Server Error");
         } else if (responseEntity.getStatusCode().is4xxClientError()) {
@@ -156,6 +191,12 @@ public class CandyController {
         } else {
             model.addAttribute("message", "An unexpected error occurred.");
         }
+    }
+
+    public String tryCatch(Exception e){
+        System.out.println(e.getMessage());
+
+        return "error";
     }
 
 }

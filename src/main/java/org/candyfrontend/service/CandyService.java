@@ -18,7 +18,8 @@ public class CandyService implements CandyClient {
 
     private RestClient restClient;
     public CandyService() {
-        restClient = RestClient.builder().baseUrl("http://localhost:8080/candy").build();
+        restClient = RestClient.builder().baseUrl("http://candy-inlamning-env.eba-3xsigumx.us-east-1.elasticbeanstalk.com/candy")
+                .build();
     }
 
 

@@ -16,7 +16,7 @@ public class Config {
 
     @Bean
     public CandyClient productClient(){
-        String baseURL="localhost:8080/Candy";//Todo Change
+        String baseURL="http://candy-inlamning-env.eba-3xsigumx.us-east-1.elasticbeanstalk.com/candy";//Todo Change
         RestClient restClient = RestClient.create(baseURL);
 
         HttpServiceProxyFactory factory = HttpServiceProxyFactory

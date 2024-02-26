@@ -29,6 +29,9 @@
         </tr>
         </thead>
         <tbody>
+        <tr th:if="${candy.empty}">
+            <td colspan="2"> Do not find any information </td>
+        </tr>
         <tr th:each="candy : ${candy}">
             <form th:action="@{searchEntry/{id}(id=${candy.id})}" method="get">
                 <td><span th:text="${candy.id}"> id </span></td>

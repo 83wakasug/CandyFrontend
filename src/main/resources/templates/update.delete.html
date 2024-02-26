@@ -27,6 +27,9 @@
     </tr>
     </thead>
     <tbody>
+    <tr th:if="${#lists.isEmpty(candy)}">
+        <td colspan="3">No information available</td>
+    </tr>
     <tr th:each="candy : ${candy}">
         <form th:action="@{candy/delete/{id}(id=${candy.id})}"  method="get">
         <td><span th:text="${candy.name}"> Name </span></td>

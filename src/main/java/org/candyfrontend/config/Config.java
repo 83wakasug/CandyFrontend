@@ -14,16 +14,16 @@ import org.springframework.web.service.invoker.HttpServiceProxyFactory;
 @RequiredArgsConstructor
 public class Config {
 
-    @Bean
+    /*@Bean
     public CandyClient productClient(){
-        String baseURL="http://candy-inlamning-env.eba-3xsigumx.us-east-1.elasticbeanstalk.com/candy";//Todo Change
+        String baseURL="http://candy-inlamning-env.eba-3xsigumx.us-east-1.elasticbeanstalk.com/candy";
         RestClient restClient = RestClient.create(baseURL);
 
         HttpServiceProxyFactory factory = HttpServiceProxyFactory
                 .builderFor(RestClientAdapter.create(restClient)).build();
 
         return factory.createClient(CandyClient.class);
-    }
+    }*/
 
 
     @Bean

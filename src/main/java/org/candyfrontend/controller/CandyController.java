@@ -189,7 +189,7 @@ public class CandyController {
         } else if (responseEntity.getStatusCode().is4xxClientError()) {
             model.addAttribute("message", "Client Error");
         } else {
-            model.addAttribute("message", "An unexpected error occurred.");
+            model.addAttribute("message", "An unexpected error occurred. Try Again!");
         }
     }
 

@@ -27,7 +27,7 @@ The AWS-based API acts as a behind-the-scenes helper for the Candy Application, 
 
 Ensure you have the following installed:
 
-- Java Development Kit (JDK)
+- Java Development Kit open-jdk21
 - Maven
 - Your preferred IDE (e.g., IntelliJ, Eclipse)
 

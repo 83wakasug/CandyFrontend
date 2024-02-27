@@ -13,10 +13,10 @@
             <nav>
                  <ul class="index">
                      <li><a href="http://localhost:8081/candy/index">Main page</a></li>
-                    <li><a href="http://localhost:8081/candy/searchEntry">Search entry</a></li>
-                    <li><a href="http://localhost:8081/candy/all">List All data</a></li>
-                    <li><a href="http://localhost:8081/candy/create">Create an Entry</a></li>
-                    <li><a href="http://localhost:8081/candy/edit">Update/Delete an Entry</a></li>
+                     <li><a href="http://localhost:8081/candy/searchEntry">Search Entry</a></li>
+                     <li><a href="http://localhost:8081/candy/all">List All Entries</a></li>
+                     <li><a href="http://localhost:8081/candy/create">Create an Entry</a></li>
+                     <li><a href="http://localhost:8081/candy/edit">Update/Delete an Entry</a></li>
                  </ul>
             </nav>
         </div>
@@ -31,15 +31,15 @@
             <table>
                 <tr>
                     <td>Name<span class="text-danger">※</span></td>
-                    <td><input type="text" th:field="*{name}" /></td>
+                    <td><input type="text" required th:field="*{name}" /></td>
                 </tr>
                 <tr>
                     <td>Manufacturing Company</td>
-                    <td><input type="text" th:field="*{manufacturingCompany}" /></td>
+                    <td><input type="text" required th:field="*{manufacturingCompany}" /></td>
                 </tr>
                 <tr>
                     <td>Price<span class="text-danger">※</span></td>
-                    <td><input type="number" th:field="*{price}" /></td>
+                    <td><input type="number" required min="0" th:field="*{price}" /></td>
                 </tr>
             </table>
 

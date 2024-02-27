@@ -31,15 +31,15 @@
             <table>
                 <tr>
                     <td>Name<span class="text-danger">※</span></td>
-                    <td><input type="text" th:field="*{name}" /></td>
+                    <td><input type="text" required th:field="*{name}" /></td>
                 </tr>
                 <tr>
                     <td>Manufacturing Company</td>
-                    <td><input type="text" th:field="*{manufacturingCompany}" /></td>
+                    <td><input type="text" required th:field="*{manufacturingCompany}" /></td>
                 </tr>
                 <tr>
                     <td>Price<span class="text-danger">※</span></td>
-                    <td><input type="number" th:field="*{price}" /></td>
+                    <td><input type="number" required min="0" th:field="*{price}" /></td>
                 </tr>
             </table>
 

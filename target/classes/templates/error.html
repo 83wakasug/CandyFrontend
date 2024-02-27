@@ -10,8 +10,8 @@
 <nav>
     <ul class="index">
         <li><a href="http://localhost:8081/candy/index">Main page</a></li>
-        <li><a href="http://localhost:8081/candy/searchEntry">Search data</a></li>
-        <li><a href="http://localhost:8081/candy/all">List All data</a></li>
+        <li><a href="http://localhost:8081/candy/searchEntry">Search Entry</a></li>
+        <li><a href="http://localhost:8081/candy/all">List All Entries</a></li>
         <li><a href="http://localhost:8081/candy/create">Create an Entry</a></li>
         <li><a href="http://localhost:8081/candy/edit">Update/Delete an Entry</a></li>
     </ul>
@@ -19,6 +19,6 @@
 <h1>Something went wrong...try again!</h1>
 <h1 th:if="${message}">Client Error: Bad Request</h1>
 <h1 th:if="${message}">Server Error: Internal Server Error</h1>
-<h1 th:unless="${message}">Unkonw error</h1>
+<h1 th:unless="${message}">unknown error</h1>
 </body>
 </html>

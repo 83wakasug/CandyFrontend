@@ -50,7 +50,7 @@ public class CandyController {
         }
     }
 
-    @GetMapping("/searchEntry")
+    @GetMapping("/all")
     public String searchEntry(Model model){
         try {
             ResponseEntity<?> responseEntity =candyService.getCandyList();
@@ -71,7 +71,7 @@ public class CandyController {
 
     }
 
-    @GetMapping("/searchEntry/{id}")
+    @GetMapping("/all/{id}")
     public String searchEntryById(Model model, @PathVariable Long id){
        try{ ResponseEntity<?> candyInfo= candyService.getCandy(id);
         if(candyInfo.getStatusCode().is2xxSuccessful())
@@ -108,7 +108,7 @@ public class CandyController {
         return candyService.getCandy(id);
     }
 
-    @GetMapping("/all")
+   /* @GetMapping("/all")
     public String findAll(Model model) {
         try {
             ResponseEntity<List> responseEntity = candyService.getCandyList();
@@ -125,7 +125,7 @@ public class CandyController {
            return tryCatch(e);
         }
 
-    }
+    }*/
 
     @PostMapping("/create/add")
     public String createData(@ModelAttribute @Validated CandyDto candyDto,Model model ){

@@ -2,6 +2,10 @@
 
 The Candy Application is a simple web application built with Spring Boot, designed to manage and display information about candies.
 
+The Candy API makes it easy for you to handle candy information. This application smoothly connects with an API hosted on Amazon Web Services (AWS). 
+This connection helps the application talks to the API to fetch or modify data. 
+The AWS-based API acts as a behind-the-scenes helper for the Candy Application, providing important endpoints for fetching and modifying data.
+
 ## Table of Contents
 
 - [Getting Started](#getting-started)
@@ -92,3 +96,10 @@ Example JSON format for a candy entry:
 - Spring Boot
 - Thymeleaf (for HTML templates)
 - Maven
+
+### Github
+Candy Inventory Backend
+https://github.com/83wakasug/Candy.git
+
+Client Candy Frontend
+https://github.com/83wakasug/CandyFrontend.git
